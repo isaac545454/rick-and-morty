@@ -7,5 +7,5 @@ export interface Info {
 
 export type ResponseData<Results> = {
 	info: Info
-	results: Results
+	results: Results[]
 }

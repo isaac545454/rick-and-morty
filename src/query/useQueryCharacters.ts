@@ -3,9 +3,9 @@ import { characters } from '../service/Http/characters'
 import { ResultsCharacters } from '../types/character'
 import { ResponseData } from '../types/ResponseData'
 
-export const useQueryCharacters = () => {
+export const useQueryCharacters = (page: string) => {
 	return useQuery<ResponseData<ResultsCharacters>>({
-		queryKey: ['characters'],
-		queryFn: characters,
+		queryKey: ['characters', page],
+		queryFn: () => characters(page),
 	})
 }
