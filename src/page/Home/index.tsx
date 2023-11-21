@@ -1,7 +1,8 @@
-import { Suspense, lazy, useState } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import { useQueryCharacters } from '../../query/useQueryCharacters'
 import { Box, Spinner } from '@chakra-ui/react'
 import Skeleton from '../../components/Skeleton'
+
 const CardLazy = lazy(() => import('../../components/Card').then(module => ({ default: module.Card })))
 
 export const Home = () => {
@@ -14,9 +15,7 @@ export const Home = () => {
 		<Box bg="#B0C4DE" pt="4rem">
 			<Box maxW="1200px" mx="auto" px="1rem" pb="4rem">
 				<Suspense fallback={<Skeleton repetition={6} />}>
-					{data?.results.map(item => (
-						<CardLazy {...item} key={item.id} />
-					))}
+					{React.Children.toArray(data?.results.map(item => <CardLazy {...item} />))}
 				</Suspense>
 			</Box>
 		</Box>
